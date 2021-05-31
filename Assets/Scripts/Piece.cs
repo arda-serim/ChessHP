@@ -801,6 +801,7 @@ public class Piece : MonoBehaviour
                 }
 
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, false);
             }
             else //Goes to square with piece and killed
             {
@@ -818,6 +819,7 @@ public class Piece : MonoBehaviour
                 Destroy(pieceGone.gameObject);
                 GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, true);
             }
         }
         else //Goes to empty square
@@ -835,6 +837,7 @@ public class Piece : MonoBehaviour
             GameManager.Instance.pieces[(int)startingVec.x, (int)startingVec.y] = null;
             GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
             GameManager.Instance.NextTurn();
+            UIManager.Instance.AddLog(team, type, vecGone, true, false);
         }
 
         if ((transform.position.y == 0 || transform.position.y == 7))
@@ -880,6 +883,7 @@ public class Piece : MonoBehaviour
                 }
 
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, false);
             }
             else //Goes to square with piece and killed
             {
@@ -897,6 +901,7 @@ public class Piece : MonoBehaviour
                 Destroy(pieceGone.gameObject);
                 GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, true);
             }
         }
         else //Goes to empty square
@@ -914,6 +919,7 @@ public class Piece : MonoBehaviour
             GameManager.Instance.pieces[(int)startingVec.x, (int)startingVec.y] = null;
             GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
             GameManager.Instance.NextTurn();
+            UIManager.Instance.AddLog(team, type, vecGone, true, false);
         }
 
         GameManager.Instance.canMove = true;
@@ -953,6 +959,7 @@ public class Piece : MonoBehaviour
                 }
 
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, false);
             }
             else //Goes to square with piece and killed
             {
@@ -970,6 +977,7 @@ public class Piece : MonoBehaviour
                 Destroy(pieceGone.gameObject);
                 GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, true);
             }
         }
         else //Goes to empty square
@@ -987,6 +995,7 @@ public class Piece : MonoBehaviour
             GameManager.Instance.pieces[(int)startingVec.x, (int)startingVec.y] = null;
             GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
             GameManager.Instance.NextTurn();
+            UIManager.Instance.AddLog(team, type, vecGone, true, false);
         }
 
         GameManager.Instance.canMove = true;
@@ -1026,6 +1035,7 @@ public class Piece : MonoBehaviour
                 }
 
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, false);
             }
             else //Goes to square with piece and killed
             {
@@ -1043,6 +1053,7 @@ public class Piece : MonoBehaviour
                 Destroy(pieceGone.gameObject);
                 GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, true);
             }
         }
         else //Goes to empty square
@@ -1060,6 +1071,7 @@ public class Piece : MonoBehaviour
             GameManager.Instance.pieces[(int)startingVec.x, (int)startingVec.y] = null;
             GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
             GameManager.Instance.NextTurn();
+            UIManager.Instance.AddLog(team, type, vecGone, true, false);
         }
 
         GameManager.Instance.canMove = true;
@@ -1099,6 +1111,7 @@ public class Piece : MonoBehaviour
                 }
 
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, false);
             }
             else //Goes to square with piece and killed
             {
@@ -1116,6 +1129,7 @@ public class Piece : MonoBehaviour
                 Destroy(pieceGone.gameObject);
                 GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, true);
             }
         }
         else //Goes to empty square
@@ -1133,6 +1147,7 @@ public class Piece : MonoBehaviour
             GameManager.Instance.pieces[(int)startingVec.x, (int)startingVec.y] = null;
             GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
             GameManager.Instance.NextTurn();
+            UIManager.Instance.AddLog(team, type, vecGone, true, false);
         }
 
         GameManager.Instance.canMove = true;
@@ -1166,24 +1181,27 @@ public class Piece : MonoBehaviour
                 case GameManager.Teams.White:
                     if (vecGone.x == 2)
                     {
-                        GameManager.Instance.pieces[0, 0].GoTo(new Vector2(3, 0));
+                        StartCoroutine(GameManager.Instance.pieces[0, 0].GoToForCastling(new Vector2(3, 0)));
                     }
                     else
                     {
-                        GameManager.Instance.pieces[7, 0].GoTo(new Vector2(5, 0));
+                        StartCoroutine(GameManager.Instance.pieces[7, 0].GoToForCastling(new Vector2(5, 0)));
                     }
                     break;
                 case GameManager.Teams.Black:
                     if (vecGone.x == 2)
                     {
-                        GameManager.Instance.pieces[0, 7].GoTo(new Vector2(3, 7));
+                        StartCoroutine(GameManager.Instance.pieces[0, 7].GoToForCastling(new Vector2(3, 7)));
                     }
                     else
                     {
-                        GameManager.Instance.pieces[7, 7].GoTo(new Vector2(5, 7));
+                        StartCoroutine(GameManager.Instance.pieces[7, 0].GoToForCastling(new Vector2(3, 7)));
                     }
                     break;
             }
+
+            GameManager.Instance.NextTurn();
+            UIManager.Instance.AddLog(team, type, vecGone, false, false);
         }
         else if (pieceGone) //Goes to square with piece 
         {
@@ -1211,6 +1229,7 @@ public class Piece : MonoBehaviour
                 }
 
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, false);
             }
             else //Goes to square with piece and killed
             {
@@ -1228,6 +1247,7 @@ public class Piece : MonoBehaviour
                 Destroy(pieceGone.gameObject);
                 GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
                 GameManager.Instance.NextTurn();
+                UIManager.Instance.AddLog(team, type, vecGone, false, true);
             }
         }
         else //Goes to empty square
@@ -1245,11 +1265,30 @@ public class Piece : MonoBehaviour
             GameManager.Instance.pieces[(int)startingVec.x, (int)startingVec.y] = null;
             GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
             GameManager.Instance.NextTurn();
+            UIManager.Instance.AddLog(team, type, vecGone, true, false);
         }
 
         GameManager.Instance.canMove = true;
         if (!movedBefore)
             movedBefore = true;
+    }
+
+    IEnumerator GoToForCastling(Vector2 vecGone)
+    {
+        Vector2 startingVec = new Vector2((int)transform.position.x, (int)transform.position.y);
+
+        Vector2 startingPos = transform.position;
+        Vector2 wantedPos = vecGone;
+        float t = 0;
+        while (t <= 1)
+        {
+            t += 0.05f;
+            transform.position = Vector3.Lerp(startingPos, wantedPos, t);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        GameManager.Instance.pieces[(int)startingVec.x, (int)startingVec.y] = null;
+        GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
     }
 
     void PromotePawn(GameManager.PieceType type, GameManager.Teams team, Vector2 vec)
