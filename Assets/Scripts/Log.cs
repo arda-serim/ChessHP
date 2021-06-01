@@ -8,12 +8,13 @@ public class Log : MonoBehaviour
 {
     public string[] xToLetter = new string[8];
 
-    int logAdded = 1;
+    int logAdded;
     [SerializeField] TextMeshProUGUI textMeshPro;
-    [SerializeField] RectTransform rect;
+    [SerializeField] RectTransform rectTransform;
 
     public void AddLog(GameManager.PieceType type, Vector2 vec, bool isEmpty, bool isKilled)
     {
+        logAdded++;
         switch (type)
         {
             case GameManager.PieceType.Pawn:
@@ -109,14 +110,16 @@ public class Log : MonoBehaviour
                 break;
         }
 
-        logAdded++;
+        if (logAdded == 1)
+        {
+            textMeshPro.text = textMeshPro.text.TrimStart();
+        }
         ChangeRectTransform();
     }
 
     void ChangeRectTransform()
     {
-        rect.sizeDelta = new Vector2(rect.sizeDelta.x, logAdded * 41);
-        Debug.Log(rect.sizeDelta);
-        rect.position = new Vector3(rect.sizeDelta.x, rect.sizeDelta.y / 2);
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, Mathf.Max(logAdded, 6) * 25);
+        rectTransform.position = new Vector3(rectTransform.position.x, Mathf.Max(0, logAdded - 6) * 25, 0);
     }
 }
