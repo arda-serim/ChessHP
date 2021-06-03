@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class LocalPlayer : MonoBehaviour
 {
     [SerializeField] GameManager.Teams team;
 
@@ -41,6 +41,15 @@ public class Player : MonoBehaviour
             mouseOnVec.x = x;
             mouseOnVec.y = y;
             highlight.transform.position = new Vector2(x, y);
+            if (mouseOnPiece)
+            {
+                UIManager.Instance.ChangePieceInfo(mouseOnPiece.maxHP, mouseOnPiece.hp, mouseOnPiece.ap);
+
+            }
+            else
+            {
+                UIManager.Instance.ChangePieceInfo();
+            }
         }
         else
         {

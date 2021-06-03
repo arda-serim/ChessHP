@@ -7,9 +7,9 @@ public class Piece : MonoBehaviour
     [SerializeField] GameManager.PieceType type;
     public GameManager.Teams team;
 
-    [SerializeField] int maxHP;
-    [SerializeField] int hp;
-    [SerializeField] int ap;
+    public int maxHP;
+    public int hp;
+    public int ap;
 
     bool movedBefore;
 
