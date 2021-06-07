@@ -14,5 +14,11 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     void Awake()
     {
         _instnace = this as T;
+        Init();
+    }
+
+    public virtual void Init()
+    {
+
     }
 }

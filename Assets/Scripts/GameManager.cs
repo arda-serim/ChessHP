@@ -209,4 +209,95 @@ public class GameManager : MonoSingleton<GameManager>
                 break;
         }
     }
+
+    public void PromotePawn(string type)
+    {
+        Vector2 vec = default;
+        Teams team = default;
+        GameObject go = null;
+
+        foreach (var piece in pieces)
+        {
+            if (piece && piece.type == PieceType.Pawn 
+                && (piece.transform.position.y == 0 || piece.transform.position.y == 7))
+            {
+                vec = new Vector2(transform.position.x, transform.position.y);
+                team = piece.team;
+                break;
+            }
+        }
+
+        if (team == Teams.White)
+        {
+            if (type == "Rook")
+            {
+                Destroy(pieces[(int)vec.x, (int)vec.y].gameObject);
+                pieces[(int)vec.x, (int)vec.y] = null;
+                go = Instantiate(piecePrefabs[1], new Vector3(vec.x, vec.y, 0), Quaternion.identity);
+                go.transform.SetParent(pieceContainer.transform);
+                pieces[(int)vec.x, (int)vec.y] = go.GetComponent<Piece>();
+            }
+            else if (type == "Knight")
+            {
+                Destroy(pieces[(int)vec.x, (int)vec.y].gameObject);
+                pieces[(int)vec.x, (int)vec.y] = null;
+                go = Instantiate(piecePrefabs[2], new Vector3(vec.x, vec.y, 0), Quaternion.identity);
+                go.transform.SetParent(pieceContainer.transform);
+                pieces[(int)vec.x, (int)vec.y] = go.GetComponent<Piece>();
+            }
+            else if (type == "Bishop")
+            {
+                Destroy(pieces[(int)vec.x, (int)vec.y].gameObject);
+                pieces[(int)vec.x, (int)vec.y] = null;
+                go = Instantiate(piecePrefabs[3], new Vector3(vec.x, vec.y, 0), Quaternion.identity);
+                go.transform.SetParent(pieceContainer.transform);
+                pieces[(int)vec.x, (int)vec.y] = go.GetComponent<Piece>();
+            }
+            else
+            {
+                Destroy(pieces[(int)vec.x, (int)vec.y].gameObject);
+                pieces[(int)vec.x, (int)vec.y] = null;
+                go = Instantiate(piecePrefabs[4], new Vector3(vec.x, vec.y, 0), Quaternion.identity);
+                go.transform.SetParent(pieceContainer.transform);
+                pieces[(int)vec.x, (int)vec.y] = go.GetComponent<Piece>();
+            }
+        }
+        else
+        {
+            if (type == "Rook")
+            {
+                Destroy(pieces[(int)vec.x, (int)vec.y].gameObject);
+                pieces[(int)vec.x, (int)vec.y] = null;
+                go = Instantiate(piecePrefabs[7], new Vector3(vec.x, vec.y, 0), Quaternion.identity);
+                go.transform.SetParent(pieceContainer.transform);
+                pieces[(int)vec.x, (int)vec.y] = go.GetComponent<Piece>();
+            }
+            else if (type == "Knight")
+            {
+                Destroy(pieces[(int)vec.x, (int)vec.y].gameObject);
+                pieces[(int)vec.x, (int)vec.y] = null;
+                go = Instantiate(piecePrefabs[8], new Vector3(vec.x, vec.y, 0), Quaternion.identity);
+                go.transform.SetParent(pieceContainer.transform);
+                pieces[(int)vec.x, (int)vec.y] = go.GetComponent<Piece>();
+            }
+            else if (type == "Bishop")
+            {
+                Destroy(pieces[(int)vec.x, (int)vec.y].gameObject);
+                pieces[(int)vec.x, (int)vec.y] = null;
+                go = Instantiate(piecePrefabs[9], new Vector3(vec.x, vec.y, 0), Quaternion.identity);
+                go.transform.SetParent(pieceContainer.transform);
+                pieces[(int)vec.x, (int)vec.y] = go.GetComponent<Piece>();
+            }
+            else
+            {
+                Destroy(pieces[(int)vec.x, (int)vec.y].gameObject);
+                pieces[(int)vec.x, (int)vec.y] = null;
+                go = Instantiate(piecePrefabs[10], new Vector3(vec.x, vec.y, 0), Quaternion.identity);
+                go.transform.SetParent(pieceContainer.transform);
+                pieces[(int)vec.x, (int)vec.y] = go.GetComponent<Piece>();
+            }
+        }
+
+        canMove = true;
+    }
 }

@@ -43,8 +43,8 @@ public class LocalPlayer : MonoBehaviour
             highlight.transform.position = new Vector2(x, y);
             if (mouseOnPiece)
             {
-                UIManager.Instance.ChangePieceInfo(mouseOnPiece.maxHP, mouseOnPiece.hp, mouseOnPiece.ap);
-
+                UIManager.Instance.ChangePieceInfo(mouseOnPiece.type, mouseOnPiece.team,
+                    mouseOnPiece.maxHP, mouseOnPiece.hp, mouseOnPiece.ap);
             }
             else
             {

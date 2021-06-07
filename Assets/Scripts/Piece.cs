@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
-    [SerializeField] GameManager.PieceType type;
+    public GameManager.PieceType type;
     public GameManager.Teams team;
 
     public int maxHP;
@@ -842,8 +842,9 @@ public class Piece : MonoBehaviour
 
         if ((transform.position.y == 0 || transform.position.y == 7))
         {
-            PromotePawn(GameManager.PieceType.Queen, team, vecGone);
+            UIManager.Instance.ShowPromotion(team);
             Destroy(this.gameObject);
+            yield break;
         }
 
         GameManager.Instance.canMove = true;
@@ -1289,21 +1290,6 @@ public class Piece : MonoBehaviour
 
         GameManager.Instance.pieces[(int)startingVec.x, (int)startingVec.y] = null;
         GameManager.Instance.pieces[(int)vecGone.x, (int)vecGone.y] = this;
-    }
-
-    void PromotePawn(GameManager.PieceType type, GameManager.Teams team, Vector2 vec)
-    {
-        switch (type)
-        {
-            case GameManager.PieceType.Rook:
-                break;
-            case GameManager.PieceType.Knight:
-                break;
-            case GameManager.PieceType.Bishop:
-                break;
-            case GameManager.PieceType.Queen:
-                break;
-        }
     }
 }
 

@@ -6,22 +6,41 @@ using TMPro;
 
 public class UIManager : MonoSingleton<UIManager>
 {
+    [Header("Constant Things")]
+    [SerializeField] string[] xToLetter = new string[8];
+    [SerializeField] Sprite[] sprites = new Sprite[12];
+
+    [Header("White Log")]
     [SerializeField] GameObject whiteLog;
     bool isWhiteLogOpen;
-    [SerializeField] GameObject blackLog;
-    bool isBlackLogOpen;
-
-    [SerializeField] Image realHealth;
-    [SerializeField] TextMeshProUGUI healthText;
-    [SerializeField] TextMeshProUGUI attackPoint;
-
-    public string[] xToLetter = new string[8];
     int whiteLogAdded;
     [SerializeField] TextMeshProUGUI whiteTextMeshPro;
-    [SerializeField] RectTransform whiteRectTransform;    
+    [SerializeField] RectTransform whiteRectTransform;
+    [SerializeField] GameObject blackLog;
+
+    [Header("Black Log")]
+    bool isBlackLogOpen;
     int blackLogAdded;
     [SerializeField] TextMeshProUGUI blackTextMeshPro;
     [SerializeField] RectTransform blackRectTransform;
+
+    [Header("Piece Info")]
+    [SerializeField] Image pieceImage;
+    [SerializeField] Image realHealth;
+    [SerializeField] Image healthBackground;
+    [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI attackPoint;
+
+    [Header("Promotion")]
+    [SerializeField] GameObject whitePromotion;
+    [SerializeField] GameObject blackPromotion;
+
+
+    public override void Init()
+    {
+        isWhiteLogOpen = true;
+        isBlackLogOpen = true;
+    }
 
     /// <summary>
     /// Adds log history to given values
@@ -187,10 +206,16 @@ public class UIManager : MonoSingleton<UIManager>
         }
     }
 
-    public void ChangePieceInfo(int maxHP, int hp, int ap)
+    public void ChangePieceInfo(GameManager.PieceType type, GameManager.Teams team, int maxHP, int hp, int ap)
     {
+        pieceImage.enabled = true;
+        if (team == GameManager.Teams.White)
+            pieceImage.sprite = sprites[type.GetHashCode()];
+        else
+            pieceImage.sprite = sprites[type.GetHashCode() + 6];
         realHealth.enabled = true;
         realHealth.fillAmount = (float)hp / (float)maxHP;
+        healthBackground.enabled = true;
         healthText.enabled = true;
         healthText.text = $"{hp}/{maxHP}";
         attackPoint.enabled = true;
@@ -199,8 +224,24 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void ChangePieceInfo()
     {
+        pieceImage.enabled = false;
         realHealth.enabled = false;
+        healthBackground.enabled = false;
         healthText.enabled = false;
         attackPoint.enabled = false;
+    }
+
+    public void ShowPromotion(GameManager.Teams team)
+    {
+        if (team == GameManager.Teams.White)
+            whitePromotion.SetActive(true);
+        else
+            blackPromotion.SetActive(true);
+    }
+
+    public void ShowPromotion()
+    {
+        whitePromotion.SetActive(false);
+        blackPromotion.SetActive(false);
     }
 }

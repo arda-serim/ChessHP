@@ -39,6 +39,15 @@ public class LocalCoopPlayer : MonoBehaviour
             mouseOnVec.x = x;
             mouseOnVec.y = y;
             highlight.transform.position = new Vector2(x, y);
+            if (mouseOnPiece)
+            {
+                UIManager.Instance.ChangePieceInfo(mouseOnPiece.type, mouseOnPiece.team, 
+                    mouseOnPiece.maxHP,mouseOnPiece.hp, mouseOnPiece.ap);
+            }
+            else
+            {
+                UIManager.Instance.ChangePieceInfo();
+            }
         }
         else
         {
